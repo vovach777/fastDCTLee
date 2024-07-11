@@ -49,7 +49,7 @@ inline void forwardTransform(Vec &&vec, Temp &&temp, int v, int t, int len) {
     auto y = vec(len - 1 - i + v);
     temp(i + t) = x + y;
     temp(i + t + halfLen) =
-        (x - y) / (std::cos((i + 0.5f) * Float(M_PI) / len) * 2);
+        (x - y) / (std::cos((i + Float(0.5)) * Float(M_PI) / len) * 2);
   }
   forwardTransform<Float>(std::forward<Temp>(temp), std::forward<Vec>(vec), t,
                           v, halfLen);
@@ -82,7 +82,7 @@ inline void inverseTransform(Vec &&vec, Temp &&temp, int v, int t, int len) {
   for (int i = 0; i < halfLen; i++) {
     auto x = temp(i + t);
     auto y =
-        temp(i + halfLen + t) / (std::cos((i + 0.5f) * Float(M_PI) / len) * 2);
+        temp(i + halfLen + t) / (std::cos((i + Float(0.5)) * Float(M_PI) / len) * 2);
     vec(i + v) = x + y;
     vec(len - 1 - i + v) = x - y;
   }
