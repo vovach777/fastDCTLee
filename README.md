@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include <cassert>
 #include "dct.hpp"
 
 int main() {
@@ -17,18 +16,20 @@ int main() {
     inout[7][7] = 10;
     inout[4][4] = 10;
 
-    DCT2D<float,float>([&](int x, int y) -> float& {
-        return inout[y][x];
-    },8,8);
 
 
 
-    for (int y = 0; y < 32; ++y, std::cout << std::endl)
-    for (int x = 0; x < 32; ++x)
+    for (int y = 0; y < 8; ++y, std::cout << std::endl)
+    for (int x = 0; x < 8; ++x)
     {
         std::cout << std::fixed << std::setprecision(1) << std::setw(5) << inout[y][x];
     }
     std::cout << std::endl;
+
+    DCT2D<float,float>([&](int x, int y) -> float& {
+        return inout[y][x];
+    },8,8);
+
 
     iDCT2D<float,float>([&](int x, int y) -> float& {
         return inout[y][x];
@@ -41,5 +42,4 @@ int main() {
     }
     std::cout << std::endl;
 
-}
-```
+}```
